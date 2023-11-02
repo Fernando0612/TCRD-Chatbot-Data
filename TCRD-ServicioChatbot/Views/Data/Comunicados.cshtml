@@ -1,0 +1,20 @@
+﻿@using Newtonsoft.Json
+@using TCRD_ServicioChatbot.Models;
+@{ Layout = null;}
+<h2>Lista de Comunicados</h2>
+
+
+@{
+    var comunicados = JsonConvert.DeserializeObject<Comunicado>(ViewBag.Comunicados.ToString());
+
+    if (comunicados.Content != null && comunicados.Content.Count > 0)
+    {
+        <h3>Total de la cantidad de comunicados: @comunicados.Content.Count</h3>
+
+        foreach (var item in comunicados.Content)
+        {
+            <p>Comunicado: @item.Name ------- Fecha del comunicado: @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") ---------- URL o Link del comunicado @item.Document  </p>
+            <br />
+        }
+    }
+}

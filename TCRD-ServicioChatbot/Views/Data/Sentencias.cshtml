@@ -1,0 +1,20 @@
+﻿@using Newtonsoft.Json
+@using TCRD_ServicioChatbot.Models;
+@{ Layout = null;}
+<h2>Lista de Sentencias</h2>
+
+
+@{
+    var sentencias = JsonConvert.DeserializeObject<Sentencia>(ViewBag.Sentencias.ToString());
+
+    if (sentencias.Content != null && sentencias.Content.Count > 0)
+    {
+        <h3>Total de la cantidad de sentencia: @sentencias.Content.Count</h3>
+
+        foreach (var item in sentencias.Content)
+        {
+<p>Sentencia: @item.Name ------- URL o Link de la sentencia @item.Name es @item.UrlAddress ---- Link del documento: @item.Document" ----- La sentencia @item.Name es relativo a @item.RelativeTo --- Fecha de la sentencia: @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
+            <br />
+        }
+    }
+}

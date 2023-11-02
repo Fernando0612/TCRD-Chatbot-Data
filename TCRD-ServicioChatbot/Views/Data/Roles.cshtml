@@ -1,0 +1,20 @@
+﻿@using Newtonsoft.Json
+@using TCRD_ServicioChatbot.Models;
+@{ Layout = null;}
+<h2>Lista de Roles de Audiciencia</h2>
+
+
+@{
+    var roles = JsonConvert.DeserializeObject<Sentencia>(ViewBag.Roles.ToString());
+
+    if (roles.Content != null && roles.Content.Count > 0)
+    {
+        <h3>Total de la cantidad de roles de audiencia: @roles.Content.Count</h3>
+
+        foreach (var item in roles.Content)
+        {
+            <p>Rol de audiencia de la fecha: @item.Name ------- URL o Link del rol de audiencia @item.Name es  @item.Document" </p>
+            <br />
+        }
+    }
+}
