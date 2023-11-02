@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'chatdata-tcrd'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A294D8C8B444B8D9CAF4441C2E272BA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A53EDE16E4F540B38BF0FE32C0D160E0 }}
           package: .
