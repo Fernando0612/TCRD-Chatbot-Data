@@ -128,7 +128,7 @@
     <Compile Include="Models\Comunicado.cs" />
     <Compile Include="Models\Eventos.cs" />
     <Compile Include="Models\Noticias.cs" />
-    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\RolesAudiencia.cs" />
     <Compile Include="Models\Sentencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 
 
 @{
-    var roles = JsonConvert.DeserializeObject<Sentencia>(ViewBag.Roles.ToString());
+    var roles = JsonConvert.DeserializeObject<RolesAudiencia>(ViewBag.Roles.ToString());
 
     if (roles.Content != null && roles.Content.Count > 0)
     {

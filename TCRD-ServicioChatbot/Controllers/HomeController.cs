@@ -42,7 +42,7 @@ namespace TCRD_ServicioChatbot.Controllers
         {
             cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountAudienceRoles");
             ViewBag.CantidadRoles = cantidad;
-            ViewBag.Roles = await entidades.GetFromApiAsync("LabTc/GetLatestAudienceRoles?cantidad=" + cantidad);
+            ViewBag.Roles = await entidades.GetFromApiAsync("LabTc/GetLastAudienceRoles?cantidad=" + cantidad);
             return View();
         }
 

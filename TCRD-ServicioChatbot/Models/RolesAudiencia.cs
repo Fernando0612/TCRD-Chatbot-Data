@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TCRD_ServicioChatbot.Models
 {
-    public class Roles
+    public class RolesAudiencia
     {
         public string Status { get; set; }
         public object Body { get; set; }
