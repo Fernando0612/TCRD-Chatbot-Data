@@ -14,45 +14,35 @@ namespace TCRD_ServicioChatbot.Controllers
 
         HelpperEntidades entidades = new HelpperEntidades();
 
-        public async Task<ActionResult> Sentencias()
+        public async Task<ActionResult> Sentencias(int cantidad = 0)
         {
-            int cantidad = await entidades.GetIntFromApiAsync("LabTc/GetCountSentencias");
+            cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountSentencias");
             ViewBag.CantidadSentencias = cantidad;
-            ViewBag.Sentencias = await entidades.GetFromApiAsync("LabTc/GetLatestSentences?cantidad=" + cantidad);
+            ViewBag.Sentencias = await entidades.GetFromApiAsync("LabTc/GetLabSentences?cantidad=" + cantidad);
             return View();
         }
 
-        public async Task<ActionResult> top5Sentencias()
+        public async Task<ActionResult> Comunicados(int cantidad = 0)
         {
-            ViewBag.CantidadSentencias = 5;
-            ViewBag.Sentencias = await entidades.GetFromApiAsync("LabTc/GetLatestSentences?cantidad=" + 5);
-            return View();
-        }
-
-        public async Task<ActionResult> Comunicados()
-        {
-            int cantidad = await entidades.GetIntFromApiAsync("LabTc/GetCountComunicados");
+            cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountComunicados");
             ViewBag.CantidadComunicados = cantidad;
             ViewBag.Comunicados = await entidades.GetFromApiAsync("LabTc/GetLatestComunicados?cantidad="+cantidad);
             return View();
         }
 
-        public async Task<ActionResult> Noticias()
+        public async Task<ActionResult> Noticias(int cantidad = 0)
         {
-            int cantidad = await entidades.GetIntFromApiAsync("LabTc/GetCountNoticias");
-            ViewBag.CantidadNoticias = cantidad; 
+            cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountNoticias");
+            ViewBag.CantidadNoticias = cantidad;
             ViewBag.Noticias = await entidades.GetFromApiAsync("LabTc/GetLatestNoticias?cantidad=" + cantidad);
-
-            return View();
+             return View();
         }
 
-        public async Task<ActionResult> Roles()
+        public async Task<ActionResult> Roles(int cantidad = 0)
         {
-
-            int cantidad = await entidades.GetIntFromApiAsync("LabTc/GetCountAudienceRoles");
+            cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountAudienceRoles");
             ViewBag.CantidadRoles = cantidad;
             ViewBag.Roles = await entidades.GetFromApiAsync("LabTc/GetLatestAudienceRoles?cantidad=" + cantidad);
-
             return View();
         }
 
