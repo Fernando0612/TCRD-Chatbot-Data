@@ -1,0 +1,21 @@
+﻿@using Newtonsoft.Json
+@using TCRD_ServicioChatbot.Models;
+@{ Layout = null;}
+<h2>Lista de Eventos</h2>
+
+
+@{
+    var eventos = JsonConvert.DeserializeObject<Evento>(ViewBag.Eventos.ToString());
+
+    if (eventos.Content != null && eventos.Content.Count > 0)
+    {
+        <h3>Total de la cantidad de comunicados: @eventos.Content.Count</h3>
+
+        foreach (var item in eventos.Content)
+        {
+
+            <p>Evento: @item.Nombre ------- Descripcion: @item.Descripcion  --- Fecha del evento @item.Nombre es en la fecha @item.FechaFinal.ToString("yyyy-MM-dd HH:mm:ss")  ---------- URL o Link del evento para mas informacion @item.URL_Documento  </p>
+            <br />
+        }
+    }
+}

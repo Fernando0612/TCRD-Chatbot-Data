@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Helpper\HelpperEntidades.cs" />
     <Compile Include="Models\Comunicado.cs" />
+    <Compile Include="Models\Eventos.cs" />
     <Compile Include="Models\Noticias.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Sentencia.cs" />
@@ -164,13 +165,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Data\About.cshtml" />
-    <Content Include="Views\Data\Contact.cshtml" />
-    <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Sentencias.cshtml" />
     <Content Include="Views\Data\Comunicados.cshtml" />
     <Content Include="Views\Data\Noticias.cshtml" />
     <Content Include="Views\Data\Roles.cshtml" />
+    <Content Include="Views\Data\Eventos.cshtml" />
+    <Content Include="Views\Data\top5Sentencias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

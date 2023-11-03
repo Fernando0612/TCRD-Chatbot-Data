@@ -15,9 +15,14 @@ namespace TCRD_ServicioChatbot.Models
 
     public class ContentComunicado
     {
-        public string Name { get; set; }
-        public string Document { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public int idComunicado { get; set; }
+        public string NombreComunicado { get; set; }
+        public string Expedientes { get; set; }
+        public DateTime FechaPublicacion { get; set; }
+        public string URL_Documento { get; set; }
+        public string NombreComunicado_URL { get; set; }
+        public DateTime FechaComunicado { get; set; }
+        public DateTime Fecha_UltimaActualizacion { get; set; }
 
     }
 }

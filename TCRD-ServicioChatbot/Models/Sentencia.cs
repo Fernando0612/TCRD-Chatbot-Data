@@ -8,8 +8,8 @@ namespace TCRD_ServicioChatbot.Models
     public class Sentencia
     {
         public string Status { get; set; }
-        public object Body { get; set; }
-        public List<ContentItem> Content { get; set; }
+        public object Body { get; set; } 
+        public string Content { get; set; }
 
     } 
 

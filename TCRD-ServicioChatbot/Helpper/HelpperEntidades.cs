@@ -26,11 +26,46 @@ namespace TCRD_ServicioChatbot.Helpper
             var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}{endpoint}");
             request.Headers.Add("username", _apiUsername);
             request.Headers.Add("token", _apiToken);
-            // Agrega cualquier otro encabezado que necesites aquí
 
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<int> GetIntFromApiAsync(string endpoint)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string baseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
+                    client.BaseAddress = new Uri(baseUrl);
+                    client.DefaultRequestHeaders.Add("username", ConfigurationManager.AppSettings["ApiUsername"]);
+                    client.DefaultRequestHeaders.Add("token", ConfigurationManager.AppSettings["ApiToken"]);
+                    var response = await client.GetAsync(endpoint);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        if (int.TryParse(stringResult, out int result))
+                        {
+                            return result;
+                        }
+                        else
+                        {
+                            throw new Exception("El resultado no es un número entero.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception($"Error en la petición: {response.StatusCode.ToString()}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos desde la API: {ex.Message}");
+            }
         }
 
 

@@ -9,7 +9,7 @@
 
     if (noticias.Content != null && noticias.Content.Count > 0)
     {
-        <h3>Total de la cantidad de sentencia: @noticias.Content.Count</h3>
+        <h3>Total de la cantidad de noticias: @ViewBag.CantidadNoticias.ToString()</h3>
 
         foreach (var item in noticias.Content)
         {

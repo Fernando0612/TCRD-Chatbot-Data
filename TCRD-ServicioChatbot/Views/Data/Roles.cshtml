@@ -9,7 +9,7 @@
 
     if (roles.Content != null && roles.Content.Count > 0)
     {
-        <h3>Total de la cantidad de roles de audiencia: @roles.Content.Count</h3>
+        <h3>Total de la cantidad de roles de audiencia: @ViewBag.CantidadRoles.ToString()</h3>
 
         foreach (var item in roles.Content)
         {

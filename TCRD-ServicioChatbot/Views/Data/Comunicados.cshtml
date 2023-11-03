@@ -9,11 +9,11 @@
 
     if (comunicados.Content != null && comunicados.Content.Count > 0)
     {
-        <h3>Total de la cantidad de comunicados: @comunicados.Content.Count</h3>
+        <h3>Total de la cantidad de comunicados: @ViewBag.CantidadComunicados</h3>
 
         foreach (var item in comunicados.Content)
         {
-            <p>Comunicado: @item.Name ------- Fecha del comunicado: @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") ---------- URL o Link del comunicado @item.Document  </p>
+            <p>Comunicado: @item.NombreComunicado ------- Fecha del comunicado: @item.FechaPublicacion.ToString("yyyy-MM-dd HH:mm:ss") ------- Los Expedientes asociados al comunicado: @item.NombreComunicado son: @item.Expedientes ---------- URL o Link del comunicado @item.URL_Documento  </p>
             <br />
         }
     }
