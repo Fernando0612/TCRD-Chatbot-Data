@@ -1,20 +1,43 @@
 ﻿@using Newtonsoft.Json
 @using TCRD_ServicioChatbot.Models;
 @{ Layout = null;}
-<h2>Lista de Noticias</h2>
 
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+
+<h2>Lista de Noticias</h2>
+<h3>Total de la cantidad de noticias: @ViewBag.CantidadNoticias.ToString()</h3>
 
 @{
     var noticias = JsonConvert.DeserializeObject<Noticias>(ViewBag.Noticias.ToString());
 
     if (noticias.Content != null && noticias.Content.Count > 0)
     {
-        <h3>Total de la cantidad de noticias: @ViewBag.CantidadNoticias.ToString()</h3>
 
-        foreach (var item in noticias.Content)
-        {
-        <p>Noticia: @item.Introduction: @item.Content ------- Fecha de la noticia: @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") ---------- URL o Link de la noticia @item.Name es @item.UrlAddress  </p>
-            <br />
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Noticia</th>
+                    <th>Introducción</th>
+                    <th>Fecha de Publicación</th>
+                    <th>URL de la noticia</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in noticias.Content)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Introduction</td>
+                        <td>@item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@item.UrlAddress</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 }

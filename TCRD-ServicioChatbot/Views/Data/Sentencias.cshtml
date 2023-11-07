@@ -1,8 +1,15 @@
 ﻿@using Newtonsoft.Json
-@using TCRD_ServicioChatbot.Models;
+@using TCRD_ServicioChatbot.Models
 @{ Layout = null; }
 
 <h2>Lista de Sentencias</h2>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+
+</style>
 
 @{
     var response = JsonConvert.DeserializeObject<Sentencia>(ViewBag.Sentencias.ToString());
@@ -10,22 +17,35 @@
         ? JsonConvert.DeserializeObject<List<ContentItem>>(response.Content)
         : new List<ContentItem>();
 
+    <h3>Total de la cantidad de sentencia: @(contentItems?.Count ?? 0)</h3>
+
     if (contentItems.Count > 0)
     {
-        <h3>Total de la cantidad de sentencia: @contentItems.Count</h3>
-
-        foreach (var item in contentItems)
-        {
-            <p>
-                Sentencia: @item.Name ----
-                Fundamentos de la Sentencia @item.Name: @item.Fundamentos -----
-                Temas de la sentencia @item.Name: @item.Temas -----   
-                Link del documento: @item.Document -----
-                La sentencia @item.Name es relativo a: @item.RelativeTo ----
-                Fecha de la sentencia: @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss")
-            </p>
-            <br />
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fundamentos</th>
+                    <th>Temas</th>
+                    <th>Documento</th>
+                    <th>Relativo a</th>
+                    <th>Fecha de Publicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in contentItems)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Fundamentos</td>
+                        <td>@item.Temas</td>
+                        <td>@item.Document</td>
+                        <td>@Html.Raw(item.RelativeTo)</td>
+                        <td>@item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
     else
     {

@@ -1,21 +1,47 @@
 ﻿@using Newtonsoft.Json
-@using TCRD_ServicioChatbot.Models;
-@{ Layout = null;}
+@using TCRD_ServicioChatbot.Models
+@{ Layout = null; }
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
 <h2>Lista de Eventos</h2>
 
-
 @{
-    var eventos = JsonConvert.DeserializeObject<Evento>(ViewBag.Eventos.ToString());
+    var response = JsonConvert.DeserializeObject<Evento>(ViewBag.Eventos.ToString());
+    List<ContentEvento> eventos = response.Content != null ? response.Content : new List<ContentEvento>();
 
-    if (eventos.Content != null && eventos.Content.Count > 0)
+    <h3>Total de la cantidad de eventos: @eventos.Count</h3>
+
+    if (eventos.Count > 0)
     {
-        <h3>Total de la cantidad de eventos: @eventos.Content.Count</h3>
-
-        foreach (var item in eventos.Content)
-        {
-
-            <p>Evento: @item.Nombre ------- Descripcion: @item.Descripcion  --- Fecha del evento @item.Nombre es en la fecha @item.FechaFinal.ToString("yyyy-MM-dd HH:mm:ss")  ---------- URL o Link del evento para mas informacion @item.Url  </p>
-            <br />
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Descripción</th>
+                    <th>Fecha Final</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in eventos)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.FechaFinal.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@item.Url</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encontraron eventos.</p>
     }
 }

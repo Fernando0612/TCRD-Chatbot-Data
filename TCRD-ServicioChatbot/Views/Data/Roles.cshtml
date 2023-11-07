@@ -1,8 +1,14 @@
 ﻿@using Newtonsoft.Json
-@using TCRD_ServicioChatbot.Models;
-@{ Layout = null;}
-<h2>Lista de Roles de Audiciencia</h2>
+@using TCRD_ServicioChatbot.Models
+@{ Layout = null; }
 
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+<h2>Lista de Roles de Audiencia</h2>
 
 @{
     var roles = JsonConvert.DeserializeObject<RolesAudiencia>(ViewBag.Roles.ToString());
@@ -11,10 +17,28 @@
     {
         <h3>Total de la cantidad de roles de audiencia: @ViewBag.CantidadRoles.ToString()</h3>
 
-        foreach (var item in roles.Content)
-        {
-            <p>Rol de audiencia de la fecha: @item.Name ------- URL o Link del rol de audiencia @item.Name es  @item.Document" </p>
-            <br />
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Fecha</th>
+                    <th>URL Documento</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in roles.Content)
+                {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@item.Document</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encontraron roles de audiencia.</p>
     }
 }
