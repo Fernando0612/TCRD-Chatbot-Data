@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json
 @using TCRD_ServicioChatbot.Models
+@using System.Text.RegularExpressions;
 @{ Layout = null; }
 
 <h2>Lista de Sentencias</h2>
@@ -8,7 +9,6 @@
     table, th, td {
         border: 1px solid;
     }
-
 </style>
 
 @{
@@ -17,35 +17,38 @@
         ? JsonConvert.DeserializeObject<List<ContentItem>>(response.Content)
         : new List<ContentItem>();
 
+
+    contentItems = contentItems.OrderBy(x => x.ReleaseDate).ToList();
+
     <h3>Total de la cantidad de sentencia: @(contentItems?.Count ?? 0)</h3>
+
+
+    var conteoPorAño = contentItems
+        .GroupBy(x => x.ReleaseDate.Year)
+        .Select(group => new { Year = group.Key, Count = group.Count() });
+
+    foreach (var yearGroup in conteoPorAño)
+    {
+        <h5> Existen @yearGroup.Count sentencias publicadas en el año  @yearGroup.Year </h5>
+    }
 
     if (contentItems.Count > 0)
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Fundamentos</th>
-                    <th>Temas</th>
-                    <th>Documento</th>
-                    <th>Relativo a</th>
-                    <th>Fecha de Publicación</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in contentItems)
-                {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Fundamentos</td>
-                        <td>@item.Temas</td>
-                        <td>@item.Document</td>
-                        <td>@Html.Raw(item.RelativeTo)</td>
-                        <td>@item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+
+        foreach (var item in contentItems)
+        {
+            string relativeTo = item.RelativeTo.TrimStart();
+
+            <p>Los fundamentos de la sentencia @item.Name : @item.Fundamentos </p>
+            <p>Los temas de la sentencia @item.Name son: @item.Temas </p>
+            <p>El documento o url de la sentencia @item.Name es: @item.Document </p>
+
+            <p>La sentencia @item.Name es @Regex.Replace(relativeTo, "<.*?p>", string.Empty)</p>
+            <p>La fecha de publicacion de la sentencia @item.Name es @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
+            <br />
+        }
+
     }
     else
     {
