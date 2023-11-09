@@ -15,6 +15,7 @@ namespace TCRD_ServicioChatbot.Helpper
         public HelpperEntidades()
         {
             _client = new HttpClient();
+            _client.Timeout = TimeSpan.FromMinutes(5);
         }
 
         private readonly string _apiBaseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
@@ -26,7 +27,6 @@ namespace TCRD_ServicioChatbot.Helpper
             var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}{endpoint}");
             request.Headers.Add("username", _apiUsername);
             request.Headers.Add("token", _apiToken);
-
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();

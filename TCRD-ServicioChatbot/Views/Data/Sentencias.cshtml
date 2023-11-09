@@ -44,11 +44,12 @@
         foreach (var item in contentItems)
         {
             string relativeTo = item.RelativeTo.TrimStart();
-
-            <p>Los fundamentos de la sentencia @item.Name : @item.Fundamentos </p>
-            <p>Los temas de la sentencia @item.Name son: @item.Temas </p>
+            string fundamentos = !string.IsNullOrEmpty(item.Fundamentos) ? "Los fundamentos de la sentencia " + item.Name + " son: " + @item.Fundamentos : "";
+            string temas = item.Temas != null ? "Los Temas de la sentencia " + item.Name + " son: " + @item.Temas : "";
+            <p>@fundamentos</p>
+            <p>@temas</p>
             <p>El documento o url de la sentencia @item.Name es: @item.Document </p>
-
+            <p>La sentencia @item.Name pertence a los expediente: @item.FileNumber </p>
             <p>La sentencia @item.Name es @Regex.Replace(relativeTo, "<.*?p>", string.Empty)</p>
             <p>La fecha de publicacion de la sentencia @item.Name es @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
         }
