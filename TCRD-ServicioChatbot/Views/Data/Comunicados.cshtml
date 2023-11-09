@@ -2,43 +2,28 @@
 @using TCRD_ServicioChatbot.Models;
 @{ Layout = null;}
 
-<style>
-    table, th, td {
-        border: 1px solid;
-    }
-</style>
 
 <h2>Lista de Comunicados</h2>
 
 <h3>Total de la cantidad de comunicados: @ViewBag.CantidadComunicados</h3>
+
+
+
 @{
+
+
     var comunicados = JsonConvert.DeserializeObject<Comunicado>(ViewBag.Comunicados.ToString());
 
     if (comunicados.Content != null && comunicados.Content.Count > 0)
     {
 
+        foreach (var item in comunicados.Content)
+        {
+            <p>La fecha de publicacion del comunicado @item.NombreComunicado es @item.FechaPublicacion.ToString("yyyy-MM-dd HH:mm:ss") </p>
+            <p>Los expedientes relacionados al comunicado @item.NombreComunicado son @item.Expedientes </p>
+            <p>El url o link del comunicado @item.NombreComunicado es @item.URL_Documento</p>
+        }
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Comunicado</th>
-                    <th>Fecha de Publicación</th>
-                    <th>Expedientes</th>
-                    <th>URL Documento</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in comunicados.Content)
-                {
-                    <tr>
-                        <td>@item.NombreComunicado</td>
-                        <td>@item.FechaPublicacion.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                        <td>@item.Expedientes</td>
-                        <td>@item.URL_Documento</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     }
 }
 

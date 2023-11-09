@@ -22,6 +22,11 @@
 
     <h3>Total de la cantidad de sentencia: @(contentItems?.Count ?? 0)</h3>
 
+    var ultimaSentencia = contentItems
+        .OrderBy(item => Math.Abs((item.ReleaseDate - DateTime.Now).Ticks))
+        .FirstOrDefault();
+
+    <h4>La ultima sentencia publicada es la @ultimaSentencia.Name</h4>
 
     var conteoPorAño = contentItems
         .GroupBy(x => x.ReleaseDate.Year)
@@ -46,7 +51,6 @@
 
             <p>La sentencia @item.Name es @Regex.Replace(relativeTo, "<.*?p>", string.Empty)</p>
             <p>La fecha de publicacion de la sentencia @item.Name es @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
-            <br />
         }
 
     }
