@@ -1,0 +1,48 @@
+﻿@using Newtonsoft.Json
+@using TCRD_ServicioChatbot.Models
+@using System.Text.RegularExpressions;
+@{ Layout = null; }
+
+<h2>Lista de Sentencias</h2>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+
+@{
+    var response = JsonConvert.DeserializeObject<Sentencia>(ViewBag.Sentencias.ToString());
+    List<ContentItem> contentItems = response.Content != null
+        ? JsonConvert.DeserializeObject<List<ContentItem>>(response.Content)
+        : new List<ContentItem>();
+
+
+
+
+
+
+    if (contentItems.Count > 0)
+    {
+        var datosYear = response.Body.Split(':');
+        <h3> Existen @datosYear[1] sentencias publicadas en el año  @datosYear[0].Split(' ')[4] </h3>
+
+        foreach (var item in contentItems)
+        {
+            string relativeTo = item.RelativeTo.TrimStart();
+            string fundamentos = !string.IsNullOrEmpty(item.Fundamentos) ? "Los fundamentos de la sentencia " + item.Name + " son: " + @item.Fundamentos : "";
+            string temas = item.Temas != null ? "Los Temas de la sentencia " + item.Name + " son: " + @item.Temas : "";
+            <p>@fundamentos</p>
+            <p>@temas</p>
+            <p>El documento o url de la sentencia @item.Name es: @item.Document </p>
+            <p>La sentencia @item.Name pertence a los expediente: @item.FileNumber </p>
+            <p>La sentencia @item.Name es @Regex.Replace(relativeTo, "<.*?p>", string.Empty)</p>
+            <p>La fecha de publicacion de la sentencia @item.Name es @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
+        }
+
+    }
+    else
+    {
+        <p>No se encontraron sentencias.</p>
+    }
+}

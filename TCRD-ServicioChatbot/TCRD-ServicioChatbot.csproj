@@ -171,6 +171,7 @@
     <Content Include="Views\Data\Roles.cshtml" />
     <Content Include="Views\Data\Eventos.cshtml" />
     <Content Include="Views\Data\top5Sentencias.cshtml" />
+    <Content Include="Views\Data\SentenciasByYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

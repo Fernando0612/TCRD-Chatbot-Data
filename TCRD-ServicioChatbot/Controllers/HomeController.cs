@@ -22,6 +22,12 @@ namespace TCRD_ServicioChatbot.Controllers
             return View();
         }
 
+        public async Task<ActionResult> SentenciasByYear(int year = 23)
+        {
+            ViewBag.Sentencias = await entidades.GetFromApiAsync("LabTc/GetLabSentencesByYear?Year=" + year);
+            return View();
+        }
+
         public async Task<ActionResult> Comunicados(int cantidad = 0)
         {
             cantidad = cantidad > 0 ? cantidad : await entidades.GetIntFromApiAsync("LabTc/GetCountComunicados");
