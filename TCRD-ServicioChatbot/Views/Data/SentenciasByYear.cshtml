@@ -24,7 +24,17 @@
 
     if (contentItems.Count > 0)
     {
+        
         var datosYear = response.Body.Split(':');
+        if (contentItems[0].ReleaseDate.Year == DateTime.Now.Year)
+        {
+            var registroMasCercano = contentItems
+                .OrderBy(item => Math.Abs((item.ReleaseDate - DateTime.Now).Ticks))
+                .FirstOrDefault();
+
+             <h3>La ultima sentencia publicada en el año @datosYear[0].Split(' ')[4] es la sentencia @registroMasCercano.Name</h3>
+        }
+
         <h3> Existen @datosYear[1] sentencias publicadas en el año  @datosYear[0].Split(' ')[4] </h3>
 
         foreach (var item in contentItems)
