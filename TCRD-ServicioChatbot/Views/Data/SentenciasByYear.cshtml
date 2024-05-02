@@ -24,7 +24,7 @@
 
     if (contentItems.Count > 0)
     {
-        
+
         var datosYear = response.Body.Split(':');
         if (contentItems[0].ReleaseDate.Year == DateTime.Now.Year)
         {
@@ -32,7 +32,7 @@
                 .OrderBy(item => Math.Abs((item.ReleaseDate - DateTime.Now).Ticks))
                 .FirstOrDefault();
 
-             <h3>La ultima sentencia publicada en el año @datosYear[0].Split(' ')[4] es la sentencia @registroMasCercano.Name</h3>
+            <h3>La ultima sentencia publicada en el año @datosYear[0].Split(' ')[4] es la sentencia @registroMasCercano.Name</h3>
         }
 
         <h3> Existen @datosYear[1] sentencias publicadas en el año  @datosYear[0].Split(' ')[4] </h3>
@@ -42,12 +42,14 @@
             string relativeTo = item.RelativeTo.TrimStart();
             string fundamentos = !string.IsNullOrEmpty(item.Fundamentos) ? "Los fundamentos de la sentencia " + item.Name + " son: " + @item.Fundamentos : "";
             string temas = item.Temas != null ? "Los Temas de la sentencia " + item.Name + " son: " + @item.Temas : "";
+            <p>---------------------------- Start of Sentencia @item.Name ---------------------------------------------</p>
             <p>@fundamentos</p>
             <p>@temas</p>
             <p>El documento o url de la sentencia @item.Name es: @item.Document </p>
             <p>La sentencia @item.Name pertence a los expediente: @item.FileNumber </p>
             <p>La sentencia @item.Name es @Regex.Replace(relativeTo, "<.*?p>", string.Empty)</p>
             <p>La fecha de publicacion de la sentencia @item.Name es @item.ReleaseDate.ToString("yyyy-MM-dd HH:mm:ss") </p>
+            <p>---------------------------- End of Sentencia @item.Name ---------------------------------------------</p>
         }
 
     }

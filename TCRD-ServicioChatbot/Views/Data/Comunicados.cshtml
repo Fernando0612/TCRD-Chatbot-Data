@@ -19,9 +19,11 @@
 
         foreach (var item in comunicados.Content)
         {
+            <p>------------------------- Start of Comunicado @item.NombreComunicado -------------------------------------</p>
             <p>La fecha de publicacion del comunicado @item.NombreComunicado es @item.FechaPublicacion.ToString("yyyy-MM-dd HH:mm:ss") </p>
             <p>Los expedientes relacionados al comunicado @item.NombreComunicado son @item.Expedientes </p>
             <p>El url o link del comunicado @item.NombreComunicado es @item.URL_Documento</p>
+            <p>------------------------- End of Comunicado @item.NombreComunicado -------------------------------------</p>
         }
 
     }
